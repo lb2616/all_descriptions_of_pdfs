@@ -1,0 +1,24 @@
+2440test由友善之臂提供，为2440开发板的示例程序，使用ADS编译。
+
+简单使用说明：
+- 使用supervivi的Download & Run功能测试，可以把本目录的bin文件下载到开发板的内存中运行，注意：下载的时候把DNW的下载地址设置为 0x30000000。
+- 使用supervivi的"a"功能可以把目标文件烧写到Nand Flash的Block 0起始的地方，然后把开发板S2开关设置为Nand模式，这样开机就可以看到运行效果了。
+
+文件说明:
+=========
+2440test_W35.bin	 - 适用于横屏3.5"LCD(简称W35)的二进制文件,可自适应64M 或128M-1GB mini2440/micro2440
+2440test_x35.bin	 - 适用于Sony 3.5"LCD的二进制文件,可自适应64M 或128M mini2440/micro2440
+2440test_N35.bin	 - 适用于NEC3.5"LCD的二进制文件,可自适应64M 或128M mini2440/micro2440
+2440test_T35.bin	 - 适用于统宝3.5"LCD的二进制文件,可自适应64M 或128M mini2440/micro2440
+2440test_A70.bin	 - 适用于群创7"LCD的二进制文件,可自适应64M 或128M mini2440/micro2440
+2440test_L80.bin	 - 适用于Sharp(或兼容)8"LCD的二进制文件,可自适应64M 或128M mini2440/micro2440
+2440test_VGA1024x768.bin - 适用于LCD2VGA显示模块的二进制文件,可自适应64M 或128M mini2440/micro2440
+2440test_S70.bin         
+2440test_W50.bin
+2440test_H43.bin
+2440test_N43.bin
+
+
+
+
+

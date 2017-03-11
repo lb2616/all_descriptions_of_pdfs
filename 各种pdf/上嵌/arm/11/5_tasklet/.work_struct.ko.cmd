@@ -1,0 +1,1 @@
+cmd_/home/libo/arm/11/5_tasklet/work_struct.ko := arm-linux-ld -EL -r  -T /home/libo/arm/linux-2.6.32.2/scripts/module-common.lds --build-id -o /home/libo/arm/11/5_tasklet/work_struct.ko /home/libo/arm/11/5_tasklet/work_struct.o /home/libo/arm/11/5_tasklet/work_struct.mod.o

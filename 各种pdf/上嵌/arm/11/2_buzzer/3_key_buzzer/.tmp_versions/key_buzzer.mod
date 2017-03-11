@@ -1,0 +1,2 @@
+/home/libo/arm/11/2_buzzer/3_key_buzzer/key_buzzer.ko
+/home/libo/arm/11/2_buzzer/3_key_buzzer/key_buzzer.o
