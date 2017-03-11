@@ -1,0 +1,50 @@
+函数名： atol
+功 能： 把字符串转换成长整型数
+用 法： long atol(const char *nptr);
+外文名
+atol
+相关函数
+atof，atoi，strtod，strtol
+表头文件
+#include<stdlib.h>
+定义函数
+long atol(const char *nptr)
+
+
+
+1简介编辑
+相关函数： atof，atoi，strtod，strtol，strtoul
+表头文件： #include<stdlib.h>
+定义函数： long atol(const char *nptr);
+函数说明： atol()会扫描参数nptr字符串，跳过前面的空格字符(就是忽略掉字符串左空格的意思)，直到遇上数字或正负符号才开始做转换，而再遇到非数字或字符串结束时('\0')才结束转换，并将结果返回。
+返回值：返回转换后的长整型数。如果传入的字符串为空，或者字符串包含的内容非阿拉伯数字序列，则函数返回默认值0。
+
+
+附加说明： atol()与使用strtol(nptr,(char**)NULL,10)；结果相同。
+2程序例1编辑
+#include <stdlib.h>
+#include <stdio.h>
+int main(void)
+{
+    long l;
+    char *str = "98765432";
+    l = atol(str); /* 原来为l = atol(str); */
+    printf("string = %s integer = %ld\n", str, l);
+    return(0);
+}
+
+
+3程序例2编辑
+/*将字符串a与字符串b转换成数字后相加*/	
+#include<stdlib.h>
+main()
+{
+    char a[]=”1000000000”;
+    char b[]=” 234567890”;
+    long c;
+    c=atol(a)+atol(b);
+    printf(“c=%d\n”,c);
+}
+执行 c=1234567890
+
+

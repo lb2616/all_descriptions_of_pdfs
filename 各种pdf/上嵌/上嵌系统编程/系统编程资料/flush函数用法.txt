@@ -1,0 +1,136 @@
+ 先来复习一个简单单词吧：
+
+flush（注意只有一个f）：冲洗，冲刷，冲掉。  例句：I flushed the toilet and went back to work again.
+
+
+      下面，我们来看看一个简单的函数：fflush(file flush,注意有两个f), 先来看一个简单的程序：
+
+[cpp] view plaincopy
+
+    #include <stdio.h>  
+    int main()  
+    {  
+        char c;  
+        scanf("%c", &c);  
+        printf("%d\n", c);  
+      
+        scanf("%c", &c);  
+        printf("%d\n", c);  
+          
+        return 0;  
+      
+    }  
+
+       运行这个程序，输入1, 并按enter键，结果为：
+
+49
+10
+     
+
+不用吃惊，这个结果很正常的，字符1对应的ASCII值刚好为49， enter键对应的ASCII值为10, 所以就有这样的结果呢。可以看出，第二个scanf函数执行了，并从缓冲区中得到了值（其实，这个值不是我们想要的），那么我们如何把缓冲区这个“马桶”里面的值冲掉呢？用fflush函数就可以了。如下：
+
+[cpp] view plaincopy
+
+    #include <stdio.h>  
+    int main()  
+    {  
+        char c;  
+        scanf("%c", &c);  
+        printf("%d\n", c);  
+      
+        fflush(stdin); // 冲掉“马桶”中的无用值  
+        scanf("%c", &c);  
+        printf("%d\n", c);  
+          
+        return 0;  
+      
+    }  
+
+      这样，就不会显示10了。
+
+
+      下面，我们来看MSDN(2008)的一个例子（MSDN上给的程序当然是对的啊）：
+
+[cpp] view plaincopy
+
+    #include <stdio.h>  
+    #include <conio.h>  
+      
+    void main( void )  
+    {  
+       int integer;  
+       char string[81];  
+      
+       /* Read each word as a string. */  
+       printf( "Enter a sentence of four words with scanf: " );  
+       for( integer = 0; integer < 4; integer++ )  
+       {  
+          scanf( "%s", string );  
+          printf( "%s\n", string );  
+       }  
+      
+       /* You must flush the input buffer before using gets. */  
+       fflush( stdin );  
+       printf( "Enter the same sentence with gets: " );  
+       gets( string );  
+       printf( "%s\n", string );  
+    }  
+
+      要是不信那个邪，你把上面程序中的fflush那一行注释掉，运行一下程序，你就知道有什么后果了。从而，你也就懂了fflush的作用。
+
+     最后，我们看看MSDN中一段话，以此结束本文：
+
+fflush has no effect on an unbuffered stream.
+
+Buffers are normally maintained by the operating system, which determines the optimal time to write the data automatically to disk: when a buffer is full, when a stream is closed, or when a program terminates normally without closing the stream. 
+
+
+
+fflush(stdin)和fflush(stdout)
+分类： 8.miscellaneous 2011-09-02 16:09 9282人阅读 评论(4) 收藏 举报
+input多线程平台windows编程网络
+ fflush(stdin)比较容易理解，即清理标准输入流，把多余的仍未被保存的数据丢掉。
+
+比如，下面这个小程序：
+
+void main()
+
+{
+
+        int a;
+
+        char str[10];
+
+        cin>>a;
+
+        cout<<a<<endl;
+
+        cin>>str;
+
+        cout<<str<<endl;
+
+}
+
+目地很简单：从stdin获得一个整数存入a，接着立马打印出来；从stdin获得一个字符串存入str，也立马打印出来。但是下面这种可能需要特别考虑：在首行输入了两个整数，在cin>>a之后，stdin缓冲还有一个整数没被读取。接下来，不等输入字符串，就直接把上面多出来的数字存入到str中去并打印。
+
+某种程度上这是操作不规范造成的，但是程序应该要有健壮性，程序员应该提前预防这种不规范的操作。可以在程序界面上提示“请输入1个整数”，甚至有时候不厌其烦的强调和警告也必要。当然，本例为求简单，并不在UI友好方面做文章。这时，可以在cin>>str语句前插入fflush(stdin)，如此一来就可以清空标准输入缓冲里多余的数据。
+
+fflush(stdout)跟fflush(stdin)类似，是对标准输出流的清理，但是它并不是把数据丢掉，而是及时地打印数据到屏幕上。为了更好的理解它，需要知道一个事实：标准输出是以『行』为单位进行的，也即碰到\n才打印数据到屏幕。这就可能造成延时，如下面这几行代码：
+
+int a;
+
+printf_s("input one number:");
+
+fflush(stdout);\\#1
+
+scanf_s("%d",&a);
+
+如果没有#1那行代码，在某些平台上就可能迟迟看不到"input one number"被打印到屏幕上来，因为它没有回车。这时候，fflush(stdout)就起到及时输出的作用。
+
+但是在Windows平台上，似乎并看不出差别来。也即MSFT已经将stdout的输出改成及时生效了。
+
+fflush函数被广泛使用在多线程、网络编程的消息处理中。
+
+fflush(stdout)：清空输出缓冲区，并把缓冲区内容输出
+
+

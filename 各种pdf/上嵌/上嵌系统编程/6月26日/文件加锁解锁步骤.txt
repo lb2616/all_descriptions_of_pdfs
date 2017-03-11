@@ -1,0 +1,13 @@
+1.int fd=open()打开文件
+2.例如给10-20字节加锁,只写锁:设定锁的属性为只写锁
+  struct flock lock;
+  lock.1_type=F_WRLCK;
+  lock.1_whence=SEEK_SET;
+  lock.1_start=10;
+  lock.1_len=10;
+  lock.1_pid=进程号;
+  my_lock(fd,lock);
+  lseek(fd,SEEK_SET,10);
+  write(fd,buf,sizeof(buf));
+  my_unlock(fd,SEEK_SET,10);解锁
+3.close(fd);

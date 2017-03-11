@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+#include <map>
+#include <string>
+
+int main()
+{
+	typedef multimap<string, string> M;
+	M mss;
+	M::iterator ib, ie;
+	mss.insert(make_pair("aa", "bb"));
+	mss.insert(make_pair("cc", "dd"));
+	mss.insert(make_pair("ee", "ff"));
+	mss.insert(make_pair("cc", "pp"));
+	mss.insert(make_pair("aa", "mm"));
+	mss.insert(make_pair("cc", "dd"));
+	mss.insert(make_pair("aa", "kk"));
+	ib = mss.begin();
+	ie = mss.end();
+	while(ib!=ie){
+		cout << ib->first << "

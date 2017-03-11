@@ -1,0 +1,88 @@
+ostream的主要操作 （1）（3）（4）使用最频繁的
+
+全局对象：cout / cerr / clog
+
+(1)operator <<  输出运算符函数
+
+	可以连续的输出
+
+(2)put(char ch)
+
+	输出单个字符
+
+	可以连续的输出
+
+(3)width(int)
+
+	设置输出默认宽度
+
+(4)fill(‘#’)   C#  ===>C Sharp
+	
+	按width()设定的宽度，用fill设置的字符填充空位
+
+(5)precision(int)
+
+	设置有效位数
+
+(6)setf(flag)/unsetf(flag)
+
+	设置/取消输出控制标志
+
+常见的输出flag有
+
+对齐方式：
+
+	ios::left
+	ios::right（默认）
+
+进制：
+
+	ios::dec     10进制（默认）
+	ios::oct	 8进制
+	ios::hex	 16进制
+
+其他：
+
+	ios::showbase     带前缀
+	ios::showpoint    带小数点
+	ios::uppercase    大写
+	ios::showpos      带符号
+	ios::scientific   科学计数法
+
+
+exercise 001
+
+	用 fill(char) 和  width(int) 画出 如下图形
+			要求：
+		*		1.金字塔的层数由用户输入
+	      ***		2.只能用一个for循环
+	     *****
+	   ********     
+			图形（一）金字塔
+
+exercise 002
+
+	*
+	**
+	***
+	****
+	***
+	**
+	*		
+			图形(二)  倒影
+
+home work 001
+
+	*	  *
+	**     **
+	***  ***
+	*******
+
+
+
+
+
+
+
+
+

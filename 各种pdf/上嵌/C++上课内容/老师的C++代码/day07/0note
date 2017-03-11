@@ -1,0 +1,151 @@
+review 
+
+	1.C++软件架构 分层
+
+	2.友员
+
+	3.运算符重载
+
+
+IO
+
+1.全局的IO对象
+
+	cin   /    cout   /   cerr   /  clog
+
+	cout 和cerr / clog的区别：
+
+		在集成开发工具下，cerr/clog打印的字体都是 红色的
+
+	集成开发工具
+	
+		集合了开发所需要的所有工具的图形操作软件
+
+		例如：eclipse  (windows)VS  2013 等   
+
+2.查看iostream文件
+
+	/usr/include/c++/4.6/iostream
+
+
+3.C++ IO流种类
+
+	设备IO	istream  ostream
+
+	文件IO	ifstream  ofstream  fstream
+
+	字符串IO ------  能熟练使用string 类即可
+
+4.设备IO类应用（了解）
+
+	istream  >> / get() / getline() / good() fail() clear()
+		     peek() / putback() / ignore()
+
+	ostream  << /  put() / width() / fill() / precision() / setf() / unsetf()
+
+5.设备IO的工作过程
+
+	istream --->  cin
+
+	键盘(输入设备) ------ 输入缓冲区  ------ > 内存
+
+	int i;
+	cin >> i;
+
+
+	ostream ---> cout 
+		
+	内存 ------- 输出缓冲区 -------> 终端（显示设备）
+
+	int i = 10;
+	cout <<  i;
+
+
+5.文件IO类	
+
+	ifstream   读文件的类
+
+		文件 ------ 输入缓冲区  ------ > 内存
+	 
+	ofstream  写文件的类
+
+		内存 ------- 输出缓冲区 -------> 文件
+
+	fstream 读写文件类
+
+6.文件IO类的使用：需要包含 fstream 头文件
+	
+		
+	a.文件的基本操作流程：
+
+		1.打开文件  （构造/open()） 
+		2.判断文件是否打开（ NULL / is_open()）
+		3.文件关闭 （close()）	
+
+	实现文件操作功能的时候，
+
+			不管实现什么内容，先把 1/2/3的代码写完！！！！
+
+	b.文件的打开模式
+
+		ios::in			只读
+		ios::out			只写
+		ios::append		追加
+
+		ios::trunc			截断
+		ios::binary		二进制
+
+	打开模式可以组合  ios::in | ios::out  以可读可写的方式打开
+
+	c.文件的创建
+
+		ofstream的对象 以ios::in打开不存在文件，不能创建文件
+
+		ifstream 的对象 以ios::app打开不存在文件，才可以创建文件
+
+	d.文件的读写
+
+		文件的读操作：ifstream的对象
+		
+			>>  /  read(buf,size)  /  getline()
+
+		文件的写操作：ofstream的对象
+
+			<<  /  write()
+
+		文件的读写操作类  fstream(用的比较少)
+
+		        >>  /  read(buf,size)  /  getline() /<<  /  write()
+
+	e.文件结尾的判断 :  eof()    
+
+	f.文件定位的成员函数
+
+		ifstream : seekg()	tellg()   --  get 指针  读指针
+		ofstream: seekp()	tellp()   --  put 指针  写指针
+
+	g.ifstream ostream fstream都有的成员函数
+
+		open()   is_open() eof()  close()
+
+		bad()  fail()  good() clear()
+
+exercise 001
+
+	复制a.txt,并取名为b.txt
+	./copy_file  a.txt  b.txt
+
+
+home work 001
+
+	完成 门禁系统  --  门禁系统类及其相关类的设计
+
+	
+
+
+
+
+
+
+
+

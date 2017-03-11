@@ -1,0 +1,115 @@
+C++
+
+	1.与C的关系： C++是C的超集
+
+	2.C++新特性
+
+		namespace / bool / 引用 / cout/cin 
+
+		函数重载	/  带形参默认值的函数
+
+		new / delete 
+
+	3.类	struct ----> class
+
+	class 类名
+	{
+		成员变量
+		
+			1.特殊：const / static / reference 
+
+				    数组 /  对象
+
+			2.默认提供的：this
+	
+	访问修饰符：	public / protected / private
+
+		成员函数
+		
+			1.特殊：const / static 
+
+			2.默认提供的：
+
+				构造 / 析构 / 拷贝构造  
+				初始化列表
+				operator&()	/ operator=()
+	}
+
+	类的四大特性：
+
+		封装：
+
+		继承：
+			继承方式	
+			单继承 / 多继承 / 菱形继承 /虚继承 
+			赋值兼容规则 / 函数的隐藏
+
+	 	多态：
+
+			虚函数 / 函数的重写
+			父类的指针或引用调用不同子类的同名方法
+
+		抽象：
+
+			纯虚函数   /  子类设计相关
+
+	4.类扩展
+
+		a.类大小的计算  （1）（2）（3）
+
+
+		b.不同的对象和不同的类
+
+ 			不同对象：内存 / 操作 / 功能
+
+			不同的类：嵌套  / 局部
+
+		c.友员 与 运算符重载
+
+		d.IO类
+
+			(1)设备IO
+
+				cin / cout / cerr/ clog  
+				istream成员函数
+				ostream成员函数
+
+			(2)文件IO
+
+				ifstream / ofstream / fstream
+
+			(3)字符串IO
+
+				string类
+
+		e.template 和 STL
+
+			(1)template / typename / class
+
+			(2)STL   
+
+				vector / list / queue / stack
+				map / set / multimap/ multiset
+		
+				iterator   / reverse_iterator
+
+				find() / foreach() / sort()等
+
+		f.异常
+
+			try / catch / throw
+
+
+		Game over !!!!
+
+			
+		
+		
+		
+
+
+
+
+
+
+

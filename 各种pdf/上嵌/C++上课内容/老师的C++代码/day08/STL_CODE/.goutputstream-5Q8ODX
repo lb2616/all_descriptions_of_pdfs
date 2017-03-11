@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+#include <map>
+#include <string>
+
+int main()
+{
+	//key value
+	map<int, string> mis;
+
+
+	mis.insert(make_pair(62,"

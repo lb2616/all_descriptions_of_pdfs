@@ -1,0 +1,67 @@
+#include<mysql/mysql.h> //ENGIN = Innodb default charset = utf8; 这是不带原子事件的
+#include<iostream>
+#include<string>
+#include<string.h>
+using namespace std;
+MYSQL *conn;
+MYSQL_RES *res;
+MYSQL_ROW row;
+
+int main(int argc, char **argv)
+{
+	const char *server = "localhost";
+	const char *user = "root";
+	const char *password = "123456";//密码
+	const char *database = "mysql";
+	conn = mysql_init(NULL);
+	//连接数据库
+	if(!mysql_real_connect(conn,server,user,password,database,0,NULL,0))
+	{
+		cout << "connect error" <<endl;
+		return 0;
+	}
+	
+	//设置字符集
+	mysql_set_character_set (conn,"utf8");
+	char a[30]="select * from ";
+	char b[50];
+	strcat(a,argv[1]);
+	strcpy(b,a);
+	if(mysql_query(conn,b))
+	{
+		cout <<"query error" <<endl;
+		return 0;
+	}
+	
+	//获得结果集
+	res = mysql_use_result(conn);
+	//依次从结果集中获得每一行，并打印
+	while((row = mysql_fetch_row(res))!=NULL)
+	{
+		cout <<row[0]<<"　"<<row[1] <<"　"<<row[2]<<endl;//行
+	}
+	
+	//释放结果集
+	mysql_free_result(res);
+	
+	//关闭数据库连接
+	mysql_close(conn);
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

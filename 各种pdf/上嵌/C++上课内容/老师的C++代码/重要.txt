@@ -1,0 +1,164 @@
+sudo gedit /etc/sysctl.d/10-ptrace.conf
+kernel.yama.ptrace_scope = 0
+reboot 重启电脑
+QT终端：	工具-》选项-》环境
+QTGUI终端配置：	x-terminal-emulator -e
+QT控制台终端配置:	xterm -e
+QtCreator的pro文件中加入mysql库：LIBS += -L /usr/lib/mysql -lmysqlclient
+1）在 LIBS 变量后面添加链接这个库的路径（例如-LC:/Qwt-6.0.1/lib）和名称（例如 -lqwt, 也可以用 qtAddLibrary(qwt) 添加动态库）
+INCLUDEPATH += ./include
+2）在INCLUDEPATH variable.后面添加这个引用该库所需要的头文件
+重新构建所有项目
+
+ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+
+cin.clear();	// 重置 cin 输入状态
+cin.sync();	// 清除 cin 缓冲区未读取信息
+#include <limits>
+cin.ignore( numeric_limits<streamsize>::max(), '\n' );
+ctrl+d 停止输入
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+vector<int> num;
+int main()
+{
+int element;
+while(cin>>element)
+{
+num.push_back(element);
+}
+for(vector<int>::iterator iter = num.begin();iter != num.end();)
+{
+	if(*iter == 13)
+	{
+		iter = num.erase(iter);
+	}
+	else
+	{
+		++iter;
+	}
+}
+return 0;
+}
+希望在系统中某个类的对象只能存在一个
+#include <iostream>
+using namespace std;
+class Singleton
+{
+private:
+static Singleton* pInstance;//静态成员，保存对象的唯一实例
+Singleton();//私有化构造函数，使其无法在类外实例化
+public:
+static Singleton* Instance();
+//void Destroy();
+static void Destroy();
+};
+Singleton* Singleton::pInstance = NULL;
+Singleton::Singleton()
+{
+cout<< "Singleton..." << endl;
+}
+Singleton* Singleton::Instance()
+{
+if(NULL == pInstance)
+{
+pInstance = new Singleton();
+}
+return pInstance;
+}
+void Singleton::Destroy()
+{
+delete pInstance;
+pInstance = NULL;
+cout<< "Destroy..." << endl;
+}
+int main()
+{
+	Singleton* ps = Singleton::Instance();//通过全局访问点获取实例
+Singleton::Destroy();
+return 0;
+}
+
+
+#include <iostream>
+using namespace std;
+class A;
+class B
+{
+public:
+	int m_data;
+public:
+	B(int data = 456):m_data(data){}
+	~B(){}
+	void show(A a);
+};
+class A
+{
+public:
+	int m_data;
+public:
+	A(int data = 123):m_data(data){}
+	~A(){}
+	friend void B::show(A a);
+};
+
+void B::show(A a)
+{
+	cout << " A a.m_data = " <<  a.m_data << endl;
+	return ;
+}
+int main(int argc,char **argv)
+{
+	A a;
+	B b;
+	b.show(a);
+	return 0;
+}
+
+1. 如果你需要来回切换是否忽略空白的话，这种方法才是首选
+int count = 0;
+char c;
+while (cin.get(c)) {  // Always reads whitespace chars.
+        count++;	
+        cerr << count << endl;
+}
+
+2. 只能忽略空白
+int count = 0;
+char c;
+cin >> noskipws;    // Stops all further whitespace skipping
+while (cin >> c) {  // Reads whitespace chars now.
+       count++;
+       cerr << count << endl;
+}
+cout左对齐
+cout.setf(ios::left);
+
+
+
+而对于喜欢使用终端命令行的用户来说，可以使用以下命令来下载。
+
+cd /tmp
+
+对于谷歌Chrome32位版本，使用如下链接：
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb
+
+对于64位版本可以使用如下链接下载：
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+下载完后，运行如下命令安装。
+
+sudo dpkg -i google-chrome*; sudo apt-get -f install
+
+然后就搞定了！安装完成后，到Unity Dash搜索Chrome就可以启动它了。
+
+http://linux.cn/thread/11794/1/1/
+
+
+
+dynamic_cast 失败返回NULL

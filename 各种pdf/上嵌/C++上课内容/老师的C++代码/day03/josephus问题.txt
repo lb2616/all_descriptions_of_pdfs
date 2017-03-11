@@ -1,0 +1,251 @@
+#include <iostream>
+#include<stdlib.h>
+using namespace std;
+typedef struct Node  
+{  
+	int data;  
+	struct Node *next;  
+}Node,*List;
+class Ring//环链表
+{
+private:
+	List First;
+	int Count;
+	int Current;
+public:
+	void Print();
+	void Clear(){};	
+	void Creatlist(int n,int m);
+	void Pivot();
+};
+void Ring::Creatlist(int n,int m)
+{
+	List p;  
+	int i;  
+	First=(Node*)malloc(sizeof(Node));  
+	if(!First)  
+	{  
+		cout<<"memory allocation error!\n";  
+		return ;  
+	}  
+	First->data=1; First->next=First;  
+	for(i=n;i>1;--i)  
+	{  
+		p=(Node*)malloc(sizeof(Node));  
+		if(!p)  
+		{  
+			cout<<"memory allocation error!\n";  
+			return;  
+		}  
+		p->data=i; p->next=First->next; First->next=p;   
+	}
+	Count = n;
+	Current = m;
+}
+void Ring::Print()
+{
+	List p=First;  
+	do  
+	{  
+		cout<<p->data<<" ";  
+		p=p->next;  
+	}while(p!=First);  
+	cout<<endl;
+}
+void Ring::Pivot()
+{
+	Node* p=First,*pre=NULL;  
+	int i,j;  
+	for(i=0;i<Count-1;++i)  
+	{  
+		for(j=1;j<Current;++j)  
+		{  
+			pre=p;  
+			p=p->next;  
+		}  
+		cout<<"出列的人是"<<p->data<<endl;  
+		pre->next=p->next; free(p);  
+		p=pre->next;  
+	}  
+	cout<<"The winner is "<<p->data<<endl;  
+}
+class Josephus
+{
+private:
+	int Boynumber;//孩子数量
+	int Beginpos;//开始位置
+	int Inteval;//间隔
+	Ring Head;
+public:
+	void Inital();//初始化
+	void Getwinner();//获得胜利者
+	void Output();
+};
+void Josephus::Inital()
+{
+	cout<<"Input the Boynumber and Inteval :";  
+	cin>>Boynumber>>Inteval;
+	Beginpos = 1; 
+	Head.Creatlist(Boynumber,Inteval);
+}
+void Josephus::Getwinner()
+{
+	Head.Pivot();
+}
+void Josephus::Output()
+{
+	Head.Print();
+}
+int main()  
+{  
+Josephus jose;
+jose.Inital();
+jose.Output();  
+jose.Getwinner();  
+return 0;  
+}  
+约瑟夫斯在40名士兵卫护下撤到一个山洞里，士兵们虽然打得精疲力尽，但依然坚贞不屈，他们发誓，决不让罗马人生俘，欲以自杀明志。在此生死攸关的时刻，约瑟夫斯却贪生怕死，惊恐不已。身为指挥官，他不敢拂逆军心提出投降，遂灵机一动，想出一个花招。他诡称自杀之举有违于犹太教的道德规范，如果要杀身成仁，最好的办法是让每个士兵按抽签方法决定顺序，依次由别人动手。他的建议得到士兵的一致赞成。但在抽签时，他略施小技，使自己抽到最后一号。当士兵们按次序一个挨一个魂归西天，只剩下约瑟夫斯和最后一个士兵时，约瑟夫斯先发制人，结果了士兵的性命，自己则跑出山洞向罗马人投降。
+#include <iostream>
+using namespace std;
+int main()
+{ 
+//建立小孩数组
+const int num=10 ;    //  定义常量  小孩数为10
+int interval;          //  定义每次数interval 个小孩，便让该小孩离开
+int a[num] ;          // 定义小孩数组
+
+
+//给小孩编号 顺序编为 1，2，3，…，10
+for(int i=0; i<num; i++)
+  a[i]= i+1;    //小孩从1号开始编 
+
+//输入数小孩的间隔
+cout<<"please input the interval:"  ;   //输入一个间隔数
+cin>>interval;
+
+//将全体参加的小孩输出，用于比较
+for( int i=0; i<num; i++)   //输入全体小孩的编号
+    cout<<a[i]<<",";
+cout <<endl;
+
+int k=1 ;     //标识处理第k个离开的小孩
+int i=-1 ;     //数组下标（下一个值0就是一个小孩的下标） （注：在VC++中 int k=1;int i=-1是错的）
+
+//处理获胜前的小孩
+while(1)  //一直循环执行
+{//  执行范围：在圈中的interval个小孩
+   for(int j=0;j<interval;)
+    {
+i=(i+1)%num;   //对下标加1求模，（其实只是针对头和尾的）
+     if(a[i]!=0)       //如果该元素的小孩在圈中，则承认数数有效
+       j++;
+}
+if(k==num) break;   //如果该小孩是最后一个，则跳出循环
+
+cout<<a[i]<<",";     //输出小孩离开后的编号
+a[i]=0;             //标识小孩已经离开
+
+k++;              //准备处理下一个圈中的小孩
+}
+
+// break语句跳转到此
+cout<<"\nNo."<<a[i]<<"boy's won. \n";  //输出胜利者
+return 0;
+}
+
+
+
+循环链表--解决Josephus问题
+#include <iostream>
+#include<stdlib.h>
+using namespace std;  
+ 
+typedef struct Node  
+{  
+	int data;  
+	struct Node *next;  
+}Node,*List;  
+
+List Creatlist(int n)  
+{  
+	List head,p;  
+	int i;  
+	head=(Node*)malloc(sizeof(Node));  
+	if(!head)  
+	{  
+		cout<<"memory allocation error!\n";  
+		exit(1);  
+	}  
+	head->data=1; head->next=head;  
+	for(i=n;i>1;--i)  
+	{  
+		p=(Node*)malloc(sizeof(Node));  
+		if(!p)  
+		{  
+			cout<<"memory allocation error!\n";  
+			exit(1);  
+		}  
+		p->data=i; p->next=head->next; head->next=p;   
+	}  
+	return head;  
+}  
+
+void Output(List head)  
+{  
+	List p=head;  
+	do  
+	{  
+		cout<<p->data<<" ";  
+		p=p->next;  
+	}while(p!=head);  
+	cout<<endl;  
+}  
+
+void Play(List head,int n,int m) //第一种
+{  
+	List p,q;  
+	int c,k;  
+	p=head; c=1; k=n;  
+	while(k>1)  
+	{  
+		if(c==m-1)  
+		{  
+			q=p->next; p->next=q->next;  
+			cout<<q->data<<" ";  
+			free(q);  
+			c=0; --k;  
+		}  
+		else {c++; p=p->next;}  
+	}  
+	cout<<"The winner is "<<p->data;  
+	cout<<endl;  
+}  
+void Josephus(List h,int n,int m)//第二种
+{  
+	Node* p=h,*pre=NULL;  
+	int i,j;  
+	for(i=0;i<n-1;++i)  
+	{  
+		for(j=1;j<m;++j)  
+		{  
+			pre=p;  
+			p=p->next;  
+		}  
+		cout<<"出列的人是"<<p->data<<endl;  
+		pre->next=p->next; free(p);  
+		p=pre->next;  
+	}  
+	cout<<"The winner is "<<p->data<<endl;  
+}  
+  
+int main()  
+{  
+List head;  
+int n,m;  
+cout<<"Input the n and m :";  
+cin>>n>>m;  
+head=Creatlist(n);  
+Output(head);  
+Josephus(head,n,m);  
+return 0;  
+}  
